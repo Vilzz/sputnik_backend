@@ -8,7 +8,7 @@ const connectDB = async () => {
     useUnifiedTopology: true,
   })
   console.log(
-    `Server connected to data base "${conn.connection.name}" on: ${conn.connection.host}`
+    `Server connected to data base "${conn.connection.name.red}" on: ${conn.connection.host.red}`
       .yellow.bold
   )
 }

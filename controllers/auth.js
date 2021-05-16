@@ -77,6 +77,80 @@ export const getMe = asyncHandler(async (req, res, next) => {
   })
 })
 
+//********************************************/
+// @desc Запрос на восстановление пароля
+// @route POST /api/v2/auth/forgotpassword
+// @access Открытый
+//********************************************/
+export const forgotPassword = asyncHandler(async (req, res, next) => {
+  const user = await User.findOne({ email: req.body.email })
+
+  if (!user) {
+    return next(
+      new ErrorResponse(
+        `Пользователь с указанным адресом ${req.body.email} не найден`,
+        404
+      )
+    )
+  }
+  const resetToken = user.getResetPasswordToken()
+  await user.save({ validateBeforeSave: false })
+
+  const resetUrl = `${req.protocol}://${req.get(
+    'host'
+  )}/api/v1/auth/resetpassword/${resetToken}`
+
+  const message = `
+    <p>Мы отправили вам это письмо потому что вы или кто-то еще запросил сброс пароля на сайте SPUTNIK-MAKETS.
+      <br /> 
+      Для завершения процедуры перейдите по ссылке:
+    </p> 
+    <a href='${resetUrl}'>Перейти на сайт SPUTNIK-MAKETS для сброса пароля</a>
+    <p>Проигнорируйте данное письмо если вы не отправляли запрос на изменение учетных данных</p>`
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: 'Запрос на смену пароля на сайте SPUTNIK_MAKETS',
+      message,
+    })
+    res.status(200).json({
+      success: true,
+      data: 'Письмо отправлено',
+    })
+  } catch (err) {
+    console.log(err)
+    user.resetPasswordToken = undefined
+    user.resetPasswordExpire = undefined
+    await user.save({ validateBeforeSave: false })
+    return next(new ErrorResponse('Письмо не может быть отправлено', 500))
+  }
+})
+
+//*****************************************************/
+// @desc Сброс пароля
+// @route PUT /api/v2/auth/resetpassword/:resettoken
+// @access Открытый
+//*****************************************************/
+export const resetPassword = asyncHandler(async (req, res, next) => {
+  const resetPasswordToken = crypto
+    .createHash('sha256')
+    .update(req.params.resettoken)
+    .digest('hex')
+
+  const user = await User.findOne({
+    resetPasswordToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  })
+  if (!user) {
+    return next(new ErrorResponse('Неверный токен сброса пароля', 400))
+  }
+  user.password = req.body.password
+  user.resetPasswordToken = undefined
+  user.resetPasswordExpire = undefined
+  await user.save()
+  sendTokenResponse(user, 200, res)
+})
+
 const sendtokenResponse = (user, statusCode, res) => {
   const token = user.getSignedJwtToken()
   const options = {

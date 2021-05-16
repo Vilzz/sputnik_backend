@@ -21,6 +21,8 @@ connectDB()
 const app = express()
 
 import auth from './routes/auth.js'
+import categories from './routes/categories.js'
+
 import errorHandler from './middleware/errorHandler.js'
 
 app.use(express.json())
@@ -43,6 +45,7 @@ app.use(hpp())
 app.use(cors())
 
 app.use('/api/v1/auth', auth)
+app.use('/api/v1/categories', categories)
 
 app.use(errorHandler)
 

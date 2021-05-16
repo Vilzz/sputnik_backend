@@ -4,8 +4,8 @@ import {
   register,
   login,
   logout,
-  //forgotPassword,
-  //resetPassword,
+  forgotPassword,
+  resetPassword,
   //updatePassword,
 } from '../controllers/auth.js'
 import { protect, saybyebye } from '../middleware/auth.js'
@@ -15,7 +15,7 @@ router.get('/me', protect, getMe)
 router.post('/register', register)
 router.post('/login', login)
 router.get('/logout', saybyebye, logout)
-//router.post('/forgotpassword', forgotPassword)
-//router.put('/resetpassword/:resettoken', resetPassword)
+router.post('/forgotpassword', forgotPassword)
+router.put('/resetpassword/:resettoken', resetPassword)
 //router.put('/updatepassword', protect, updatePassword)
 export default router
