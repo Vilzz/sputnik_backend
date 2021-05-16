@@ -1,0 +1,30 @@
+{
+  "name": "sputnik_backend",
+  "version": "1.0.0",
+  "description": "Backend api for sputnik site",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "Dmitriy Baklanov, e-mail:n79613928275@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "colors": "^1.4.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^9.0.2",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-mongo-sanitize": "^2.1.0",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.6.0",
+    "hpp": "^0.2.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.9",
+    "morgan": "^1.10.0",
+    "slugify": "^1.5.3",
+    "xss-clean": "^0.1.1"
+  }
+}
