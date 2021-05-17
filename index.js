@@ -22,6 +22,8 @@ const app = express()
 
 import auth from './routes/auth.js'
 import categories from './routes/categories.js'
+import makets from './routes/makets.js'
+import prices from './routes/prices.js'
 
 import errorHandler from './middleware/errorHandler.js'
 
@@ -46,6 +48,8 @@ app.use(cors())
 
 app.use('/api/v1/auth', auth)
 app.use('/api/v1/categories', categories)
+app.use('/api/v1/makets', makets)
+app.use('/api/v1/prices', prices)
 
 app.use(errorHandler)
 
