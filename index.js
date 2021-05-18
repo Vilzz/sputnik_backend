@@ -24,6 +24,7 @@ import auth from './routes/auth.js'
 import categories from './routes/categories.js'
 import makets from './routes/makets.js'
 import prices from './routes/prices.js'
+import orders from './routes/orders.js'
 
 import errorHandler from './middleware/errorHandler.js'
 
@@ -40,7 +41,7 @@ app.use(helmet())
 app.use(xss())
 const limiter = rateLimit({
   windowMs: 10 * 60 * 100, //10 min
-  max: 5,
+  max: 10,
 })
 app.use(limiter)
 app.use(hpp())
@@ -50,6 +51,7 @@ app.use('/api/v1/auth', auth)
 app.use('/api/v1/categories', categories)
 app.use('/api/v1/makets', makets)
 app.use('/api/v1/prices', prices)
+app.use('/api/v1/orders', orders)
 
 app.use(errorHandler)
 

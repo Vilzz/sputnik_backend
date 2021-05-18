@@ -52,6 +52,18 @@ const MaketSchema = new mongoose.Schema(
     timestamps: true,
   }
 )
+MaketSchema.statics.deletePrices = async function (id) {
+  try {
+    await this.model('Price').deleteMany({ maket: id })
+  } catch (error) {
+    console.log(error)
+  }
+}
+MaketSchema.pre('remove', function (next) {
+  this.constructor.deletePrices(this._id)
+  next()
+})
+
 MaketSchema.virtual('prices', {
   ref: 'Price',
   localField: '_id',

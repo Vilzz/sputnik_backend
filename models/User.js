@@ -16,6 +16,14 @@ const UserSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, 'Требуется ввести пароль'],
+    minlength: [6, 'Минимальная длина пароля - 6 символов'],
+    select: false,
+  },
+  phone: {
+    type: String,
+  },
+  address: {
+    type: String,
   },
   role: {
     type: String,

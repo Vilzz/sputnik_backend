@@ -12,7 +12,7 @@ const PriceSchema = new mongoose.Schema(
       required: [true, 'Требуется указать масштаб изделия'],
       enum: ['1:250', '1:144', '1:100', '1:72', '1:50', '1:25'],
     },
-    prices: {
+    price: {
       rub: {
         price: String,
         currency: {
