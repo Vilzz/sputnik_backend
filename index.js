@@ -35,7 +35,8 @@ app.use(cookieParser())
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('short'))
 }
-app.use(express.static(path.join(path.resolve(path.dirname('')), 'public')))
+const __dirname = path.resolve(path.dirname(''))
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(fileupload())
 app.use(mongoSanitize())
 app.use(helmet())

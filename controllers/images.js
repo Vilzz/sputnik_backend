@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 import ErrorResponse from '../utils/errorResponse.js'
 import asyncHandler from '../middleware/asyncHandler.js'
 import { v4 as uuidv4 } from 'uuid'
@@ -10,21 +11,27 @@ import { v4 as uuidv4 } from 'uuid'
 //*********************************************************/
 export const getImgList = asyncHandler(async (req, res, next) => {
   const { folder } = req.params
-  await fs.readdir(`${process.env.FILE_UPLOAD_PATH}${folder}`, (err, files) => {
-    if (err) {
-      console.log(err)
-      return next(new ErrorResponse(`Проблема при загрузке списка файлов`, 500))
-    } else {
-      const filesObj = files.map((file) => {
-        return {
-          _id: uuidv4(),
-          name: `/images/${folder}/${file}`,
-        }
-      })
+  const __dirname = path.resolve(path.dirname(''))
+  await fs.readdir(
+    `${__dirname}/${process.env.FILE_UPLOAD_PATH}/${folder}`,
+    (err, files) => {
+      if (err) {
+        console.log(err)
+        return next(
+          new ErrorResponse(`Проблема при загрузке списка файлов`, 500)
+        )
+      } else {
+        const filesObj = files.map((file) => {
+          return {
+            _id: uuidv4(),
+            name: `/images/${folder}/${file}`,
+          }
+        })
 
-      res.status(200).json({ success: true, data: filesObj })
+        res.status(200).json({ success: true, data: filesObj })
+      }
     }
-  })
+  )
 })
 
 //*************************************/

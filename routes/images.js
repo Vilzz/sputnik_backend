@@ -4,6 +4,7 @@ import { imageUpload, getImgList } from '../controllers/images.js'
 
 const router = express.Router()
 
-router.route('/').post(protect, authorise('Admin', 'User'), imageUpload)
-router.route('/:folder').get(protect, authorise('Admin', 'User'), getImgList)
+router.route('/').post(protect, authorise('Admin', 'Super'), imageUpload)
+router.route('/:folder').get(protect, authorise('Admin', 'Super'), getImgList)
+
 export default router
