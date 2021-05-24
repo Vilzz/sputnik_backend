@@ -26,7 +26,6 @@ import makets from './routes/makets.js'
 import prices from './routes/prices.js'
 import orders from './routes/orders.js'
 import images from './routes/images.js'
-import mainmenu from './routes/mainmenu.js'
 
 import errorHandler from './middleware/errorHandler.js'
 
@@ -56,7 +55,6 @@ app.use('/api/v1/makets', makets)
 app.use('/api/v1/prices', prices)
 app.use('/api/v1/orders', orders)
 app.use('/api/v1/images', images)
-app.use('/api/v1/mainmenu', mainmenu)
 
 app.use(errorHandler)
 
