@@ -43,7 +43,7 @@ app.use(helmet())
 app.use(xss())
 const limiter = rateLimit({
   windowMs: 10 * 60 * 100, //10 min
-  max: 10,
+  max: 100,
 })
 app.use(limiter)
 app.use(hpp())

@@ -13,7 +13,7 @@ import Category from '../models/Category.js'
 const router = express.Router()
 router
   .route('/')
-  .get(advancedRes(Category), getCategories)
+  .get(advancedRes(Category, { path: 'makets' }), getCategories)
   .post(protect, authorise('Admin', 'Super'), createCategory)
 
 router

@@ -35,7 +35,9 @@ export const getCategory = asyncHandler(async (req, res, next) => {
 //*************************************/
 export const getCategoryBySlug = asyncHandler(async (req, res, next) => {
   const { slug } = req.params
-  const category = await Category.findOne({ slug })
+  const category = await Category.findOne({ slug }).populate({
+    path: 'makets',
+  })
   if (!category) {
     return next(new ErrorResponse(`Ресурс - ${slug} не найден`, 404))
   }
