@@ -17,6 +17,19 @@ const MaketSchema = new mongoose.Schema(
       maxlength: [100, 'Максимальная длина наименования 100 знаков'],
       trim: true,
     },
+    shortdesc: {
+      type: String,
+      required: [true, 'Требуется добавить краткое описание макета'],
+      maxlength: [200, 'Максималная длина описания 200 знаков'],
+    },
+    shortdesc_en: {
+      type: String,
+      required: [
+        true,
+        'Требуется добавить краткое описание макета на английском языке',
+      ],
+      maxlength: [200, 'Максималная длина описания 200 знаков'],
+    },
     description: {
       type: String,
       required: [true, 'Требуется добавить описание макета'],
