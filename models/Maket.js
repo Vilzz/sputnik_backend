@@ -20,7 +20,7 @@ const MaketSchema = new mongoose.Schema(
     shortdesc: {
       type: String,
       required: [true, 'Требуется добавить краткое описание макета'],
-      maxlength: [200, 'Максималная длина описания 200 знаков'],
+      maxlength: [100, 'Максималная длина описания 100 знаков'],
     },
     shortdesc_en: {
       type: String,
@@ -28,7 +28,7 @@ const MaketSchema = new mongoose.Schema(
         true,
         'Требуется добавить краткое описание макета на английском языке',
       ],
-      maxlength: [200, 'Максималная длина описания 200 знаков'],
+      maxlength: [100, 'Максималная длина описания 100 знаков'],
     },
     description: {
       type: String,
@@ -49,6 +49,10 @@ const MaketSchema = new mongoose.Schema(
         enum: ['1:250', '1:144', '1:100', '1:72', '1:50', '1:25'],
       },
     ],
+    prodtime: {
+      type: String,
+      default: '10',
+    },
     images: [
       {
         type: String,

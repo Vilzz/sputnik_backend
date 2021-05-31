@@ -18,10 +18,14 @@ export const getMakets = asyncHandler(async (req, res, next) => {
 //*************************************/
 export const getMaket = asyncHandler(async (req, res, next) => {
   const { id } = req.params
-  const maket = await Maket.findById(id).populate({
-    path: 'category',
-    select: 'slug name',
-  })
+  const maket = await Maket.findById(id).populate([
+    {
+      path: 'category',
+      select: 'slug name name_en',
+    },
+    { path: 'prices' },
+  ])
+
   if (!maket) {
     return next(new ErrorResponse(`Ресурс с id -${id} не найден`, 404))
   }
