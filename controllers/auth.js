@@ -4,15 +4,24 @@ import asyncHandler from '../middleware/asyncHandler.js'
 import User from '../models/User.js'
 
 //*************************************/
+// @desc    Список пользователей
+// @route   GET /api/v1/auth/users
+// @access  Приватный
+//*************************************/
+export const getUsers = asyncHandler(async (req, res, next) => {
+  res.status(200).json(res.advancedResults)
+})
+
+//*************************************/
 // @desc    Регистрация пользователя
 // @route   POST /api/v1/auth/register
 // @access  Публичный
 //*************************************/
 export const register = asyncHandler(async (req, res, next) => {
-  const { name, email, password, role } = req.body
+  const { username, email, password, role } = req.body
   // Создаем пользователя
   const user = await User.create({
-    name,
+    name: username,
     email,
     password,
     role,

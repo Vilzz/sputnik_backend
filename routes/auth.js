@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   getMe,
+  getUsers,
   register,
   login,
   logout,
@@ -8,9 +9,18 @@ import {
   resetPassword,
   //updatePassword,
 } from '../controllers/auth.js'
-import { protect, saybyebye } from '../middleware/auth.js'
+import { authorise, protect, saybyebye } from '../middleware/auth.js'
+import advancedRes from '../middleware/advancedRes.js'
+import User from '../models/User.js'
 const router = express.Router()
 
+router.get(
+  '/users',
+  protect,
+  authorise('Admin', 'Super'),
+  advancedRes(User),
+  getUsers
+)
 router.get('/me', protect, getMe)
 router.post('/register', register)
 router.post('/login', login)

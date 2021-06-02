@@ -49,6 +49,17 @@ const MaketSchema = new mongoose.Schema(
         enum: ['1:250', '1:144', '1:100', '1:72', '1:50', '1:25'],
       },
     ],
+    keywords: {
+      type: [String],
+      required: [true, 'Требуется добавить хотя бы одно ключевое слово'],
+    },
+    keywords_en: {
+      type: [String],
+      required: [
+        true,
+        'Требуется добавить хотя бы одно ключевое слово на английском языке',
+      ],
+    },
     prodtime: {
       type: String,
       default: '10',
