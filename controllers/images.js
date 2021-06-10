@@ -35,7 +35,7 @@ export const getImgList = asyncHandler(async (req, res, next) => {
 })
 
 //*************************************/
-// @desc Загрузить изображение для слайдера
+// @desc Загрузить изображение на сервер
 // @route POST /api/v1/images
 // @access Закрытый (администратор, разработчик)
 //*************************************/
@@ -59,12 +59,12 @@ export const imageUpload = (req, res, next) => {
     )
   }
   //file.name = `img_${maket.slug}${path.parse(file.name).ext}`;
-  const fullpath = `${process.env.FILE_UPLOAD_PATH}${folder}/${file.name}`
+  const fullpath = `${process.env.FILE_UPLOAD_PATH}/${folder}/${file.name}`
 
-  if (fs.existsSync(fullpath)) {
-    fs.unlink(fullpath, (err) => {
+  if (fs.existsSync(`.${fullpath}`)) {
+    fs.unlink(`.${fullpath}`, (err) => {
       if (err) throw err
-      file.mv(fullpath, (err) => {
+      file.mv(`.${fullpath}`, (err) => {
         if (err) {
           console.error(err)
           return next(new ErrorResponse(`Проблема при загрузке файла`, 500))
@@ -72,12 +72,12 @@ export const imageUpload = (req, res, next) => {
 
         res.status(200).json({
           success: true,
-          data: file.name,
+          data: fullpath,
         })
       })
     })
   } else {
-    file.mv(fullpath, (err) => {
+    file.mv(`.${fullpath}`, (err) => {
       if (err) {
         console.error(err)
         return next(new ErrorResponse(`Проблема при загрузке файла`, 500))
@@ -85,7 +85,7 @@ export const imageUpload = (req, res, next) => {
 
       res.status(200).json({
         success: true,
-        data: file.name,
+        data: fullpath,
       })
     })
   }
