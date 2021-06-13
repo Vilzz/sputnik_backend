@@ -64,6 +64,10 @@ const MaketSchema = new mongoose.Schema(
       type: String,
       default: '10',
     },
+    published: {
+      type: Boolean,
+      default: false,
+    },
     images: [
       {
         type: String,
