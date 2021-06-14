@@ -14,7 +14,13 @@ const router = express.Router()
 
 router
   .route('/')
-  .get(advancedRes(Maket, { path: 'prices' }), getMakets)
+  .get(
+    advancedRes(Maket, [
+      { path: 'prices' },
+      { path: 'category', select: '_id name' },
+    ]),
+    getMakets
+  )
   .post(protect, authorise('Admin', 'Super'), createMaket)
 router
   .route('/:id')
