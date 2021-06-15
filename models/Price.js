@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-
+//@TODO Добавить валидатор на поле scale
 const PriceSchema = new mongoose.Schema(
   {
     maket: {
@@ -11,6 +11,7 @@ const PriceSchema = new mongoose.Schema(
       type: String,
       required: [true, 'Требуется указать масштаб изделия'],
       enum: ['1:250', '1:144', '1:100', '1:72', '1:50', '1:25'],
+      unique: true,
     },
     price: {
       rub: {
