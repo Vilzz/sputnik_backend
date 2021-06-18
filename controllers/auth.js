@@ -13,6 +13,24 @@ export const getUsers = asyncHandler(async (req, res, next) => {
 })
 
 //*************************************/
+// @desc    Удалить пользователя
+// @route   DELETE /api/v1/auth/users/:id
+// @access  Приватный
+//*************************************/
+export const deleteUser = asyncHandler(async (req, res, next) => {
+  const { id } = req.params
+  const user = await User.findById(id)
+  if (!user) {
+    return next(new ErrorResponse(`Пользователь с id - ${id} не найден`, 404))
+  }
+  user.remove()
+  res.status(200).json({
+    success: true,
+    data: {},
+  })
+})
+
+//*************************************/
 // @desc    Регистрация пользователя
 // @route   POST /api/v1/auth/register
 // @access  Публичный
