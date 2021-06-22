@@ -27,6 +27,7 @@ import prices from './routes/prices.js'
 import orders from './routes/orders.js'
 import images from './routes/images.js'
 import vacancy from './routes/vacancy.js'
+import articles from './routes/articles.js'
 
 import errorHandler from './middleware/errorHandler.js'
 
@@ -57,6 +58,7 @@ app.use('/api/v1/prices', prices)
 app.use('/api/v1/orders', orders)
 app.use('/api/v1/images', images)
 app.use('/api/v1/vacancies', vacancy)
+app.use('/api/v1/articles', articles)
 
 app.use(errorHandler)
 
