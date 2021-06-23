@@ -8,6 +8,7 @@ import {
   forgotPassword,
   resetPassword,
   deleteUser,
+  getUser,
   //updatePassword,
 } from '../controllers/auth.js'
 import { authorise, protect, saybyebye } from '../middleware/auth.js'
@@ -22,7 +23,10 @@ router.get(
   advancedRes(User),
   getUsers
 )
-router.delete('/users/:id', protect, authorise('Admin'), deleteUser)
+router
+  .route('/users/:id')
+  .get(protect, authorise('Admin'), getUser)
+  .delete(protect, authorise('Admin'), deleteUser)
 router.get('/me', protect, getMe)
 router.post('/register', register)
 router.post('/login', login)

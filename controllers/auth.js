@@ -103,6 +103,19 @@ export const getMe = asyncHandler(async (req, res, next) => {
     data: user,
   })
 })
+//********************************************/
+// @desc Данные заданного пользователя
+// @route GET /api/v2/auth/users/:id
+// @access Закрытый
+//********************************************/
+export const getUser = asyncHandler(async (req, res, next) => {
+  const { id } = req.params
+  const user = await User.findById(id)
+  res.status(200).json({
+    success: true,
+    data: user,
+  })
+})
 
 //********************************************/
 // @desc Запрос на восстановление пароля
