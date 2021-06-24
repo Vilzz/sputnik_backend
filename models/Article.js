@@ -29,6 +29,12 @@ const ArticleSchema = new mongoose.Schema(
     keywords_en: {
       type: String,
     },
+    description: {
+      type: String,
+    },
+    description_en: {
+      type: String,
+    },
     image: {
       type: String,
     },
