@@ -70,7 +70,11 @@ const MaketSchema = new mongoose.Schema(
     },
     images: [
       {
-        type: String,
+        image: String,
+        isMain: {
+          type: Boolean,
+          default: false,
+        },
       },
     ],
     category: {
