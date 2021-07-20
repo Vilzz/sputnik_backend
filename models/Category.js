@@ -5,22 +5,22 @@ const CategorySchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, 'Требуется ввести наименование категории'],
+      //required: [true, 'Требуется ввести наименование категории'],
       maxlength: [100, 'Максимальное количество знаков - 100'],
     },
     name_en: {
       type: String,
-      required: [true, 'Please provide the category name'],
+      //required: [true, 'Please provide the category name'],
       maxlength: [100, 'Max length of the name - 100'],
     },
     description: {
       type: String,
-      required: [true, 'Требуется ввести описание категории'],
+      //required: [true, 'Требуется ввести описание категории'],
       maxlength: [1000, 'Максимальное количество знаков описания - 1000'],
     },
     description_en: {
       type: String,
-      required: [true, 'Please provide category description'],
+      //required: [true, 'Please provide category description'],
       maxlength: [1000, 'Max length of description - 1000'],
     },
     image: {
